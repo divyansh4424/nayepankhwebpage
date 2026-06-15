@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NayePankh Foundation — Giving Wings to Uplift the Underprivileged</title>
+<meta name="description" content="NayePankh Foundation is a UP Government registered, 80G & 12A certified, student-led NGO. We have helped over 2 lakh underprivileged people with free food, sanitary pads, clothes and education. Badalte Bharat Ki Nayi Tasveer." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+  /* ===================== THEME TOKENS ===================== */
+  :root {
+    --bg: #eef4fb; --bg-soft: #e4edf8; --surface: #ffffff;
+    --ink: #15213c; --muted: #5a6780;
+    --primary: #2e6fd6; --primary-deep: #1d4fa6;
+    --accent: #f3a738; --accent-soft: #fde4bd; --accent-deep: #e67e3a;
+    --rose: #e85d75;
+    --line: rgba(21,33,60,.10); --line-strong: rgba(21,33,60,.18);
+    --shadow: 0 18px 50px -24px rgba(21,33,60,.35);
+    --glow-1: rgba(46,111,214,.18); --glow-2: rgba(243,167,56,.20);
+  }
+  html.dark {
+    --bg: #0a1120; --bg-soft: #0e1729; --surface: #131d33;
+    --ink: #eaf1fc; --muted: #97a3be;
+    --primary: #5d9bf2; --primary-deep: #8fbcf8;
+    --accent: #f6b34d; --accent-soft: #3a2f1c; --accent-deep: #f6b34d;
+    --rose: #f0859a;
+    --line: rgba(255,255,255,.10); --line-strong: rgba(255,255,255,.20);
+    --shadow: 0 24px 60px -28px rgba(0,0,0,.8);
+    --glow-1: rgba(93,155,242,.22); --glow-2: rgba(246,179,77,.16);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.6; overflow-x: hidden;
+    transition: background .5s ease, color .5s ease;
+  }
+  h1,h2,h3,h4 { font-family: "Fraunces", Georgia, serif; line-height: 1.1; font-weight: 600; letter-spacing: -.01em; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { width: min(1160px, 92vw); margin-inline: auto; }
+  .eyebrow { font-size:.78rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--primary); display:inline-flex; align-items:center; gap:.5rem; }
+  .eyebrow::before { content:""; width:26px; height:2px; background:var(--accent); border-radius:2px; }
+
+  /* ===================== BUTTONS ===================== */
+  .btn { display:inline-flex; align-items:center; gap:.5rem; font-weight:600; font-size:.98rem; padding:.85rem 1.5rem; border-radius:100px; border:1px solid transparent; cursor:pointer; transition:transform .2s, box-shadow .2s, background .2s, border-color .2s, color .2s; font-family:inherit; }
+  .btn-primary { background:var(--primary); color:#fff; box-shadow:0 12px 26px -12px var(--primary); }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 18px 30px -12px var(--primary); }
+  .btn-ghost { background:transparent; color:var(--ink); border-color:var(--line-strong); }
+  .btn-ghost:hover { transform:translateY(-2px); border-color:var(--primary); color:var(--primary); }
+  .btn-accent { background:var(--accent); color:#3a2607; box-shadow:0 12px 26px -12px var(--accent); }
+  .btn-accent:hover { transform:translateY(-2px); }
+
+  /* ===================== SCROLL PROGRESS ===================== */
+  #progress { position:fixed; top:0; left:0; height:3px; width:0%; z-index:100; background:linear-gradient(90deg,var(--primary),var(--accent)); transition:width .1s linear; }
+
+  /* ===================== NAV ===================== */
+  header.nav { position:sticky; top:0; z-index:60; backdrop-filter:blur(12px); background:color-mix(in srgb, var(--bg) 80%, transparent); border-bottom:1px solid transparent; transition:border-color .3s, background .3s; }
+  header.nav.scrolled { border-bottom-color:var(--line); }
+  .nav-inner { display:flex; align-items:center; justify-content:space-between; height:72px; }
+  .brand { display:flex; align-items:center; gap:.6rem; font-family:"Fraunces",serif; font-weight:600; font-size:1.25rem; }
+  .brand .mark { width:34px; height:34px; flex:none; }
+  .brand b { color:var(--primary); font-weight:700; }
+  .nav-links { display:flex; align-items:center; gap:1.7rem; }
+  .nav-links a.link { font-size:.95rem; font-weight:500; color:var(--muted); transition:color .2s; }
+  .nav-links a.link:hover { color:var(--ink); }
+  .nav-actions { display:flex; align-items:center; gap:.7rem; }
+  .theme-toggle { width:42px; height:42px; border-radius:50%; border:1px solid var(--line-strong); background:var(--surface); display:grid; place-items:center; cursor:pointer; color:var(--ink); transition:transform .2s, border-color .2s; }
+  .theme-toggle:hover { transform:rotate(15deg); border-color:var(--primary); }
+  html.dark .theme-toggle .moon { display:none; }
+  .theme-toggle .sun { display:none; }
+  html.dark .theme-toggle .sun { display:block; }
+  .hamburger { display:none; width:42px; height:42px; border-radius:12px; border:1px solid var(--line-strong); background:var(--surface); cursor:pointer; color:var(--ink); }
+
+  /* ===================== HERO ===================== */
+  .hero { position:relative; padding:clamp(3.5rem,9vw,7rem) 0 clamp(3rem,7vw,5.5rem); overflow:hidden; }
+  .hero::before,.hero::after { content:""; position:absolute; border-radius:50%; filter:blur(70px); z-index:0; pointer-events:none; }
+  .hero::before { width:460px; height:460px; background:var(--glow-1); top:-140px; right:-80px; }
+  .hero::after { width:420px; height:420px; background:var(--glow-2); bottom:-180px; left:-120px; }
+  .hero-grid { position:relative; z-index:2; display:grid; grid-template-columns:1.12fr .88fr; gap:2.5rem; align-items:center; }
+  .hero h1 { font-size:clamp(2.4rem,5.6vw,4.1rem); margin:1.1rem 0 0; }
+  .hero h1 .accent { color:var(--accent); font-style:italic; font-weight:500; }
+  .hero p.lead { font-size:clamp(1.05rem,1.6vw,1.2rem); color:var(--muted); max-width:38ch; margin:1.3rem 0 1.8rem; }
+  .hero-cta { display:flex; flex-wrap:wrap; gap:.8rem; }
+  .translate-chip { margin-top:1.7rem; display:inline-flex; align-items:center; gap:.6rem; font-size:.9rem; color:var(--muted); background:var(--surface); border:1px solid var(--line); border-radius:100px; padding:.45rem 1rem; box-shadow:var(--shadow); }
+  .translate-chip span.hi { font-family:"Fraunces",serif; color:var(--ink); font-weight:600; }
+  .hero-art { position:relative; min-height:380px; display:grid; place-items:center; }
+  .hero-art .halo { position:absolute; width:280px; height:280px; border-radius:50%; background:radial-gradient(circle,var(--accent-soft),transparent 70%); opacity:.8; }
+  .feather-main { width:200px; position:relative; z-index:2; animation:floatY 6s ease-in-out infinite; }
+  @keyframes floatY { 0%,100%{transform:translateY(0) rotate(-6deg);} 50%{transform:translateY(-18px) rotate(-2deg);} }
+  .drift { position:absolute; z-index:4; width:30px; opacity:0; animation:drift 9s linear infinite; pointer-events:none; }
+  .drift.d1{left:4%;animation-delay:0s;} .drift.d2{right:2%;left:auto;width:20px;animation-delay:3s;animation-duration:11s;} .drift.d3{left:-3%;width:26px;animation-delay:5.5s;animation-duration:10s;}
+  @keyframes drift { 0%{transform:translateY(60px) rotate(0);opacity:0;} 15%{opacity:.85;} 85%{opacity:.85;} 100%{transform:translateY(-360px) rotate(180deg);opacity:0;} }
+
+  /* Hero photo */
+  .photo-frame { position:relative; z-index:2; width:min(360px,82%); aspect-ratio:4/5; border-radius:26px; overflow:hidden; box-shadow:var(--shadow); background:linear-gradient(155deg,var(--primary),var(--accent-deep)); transform:rotate(2deg); transition:transform .5s ease; }
+  .photo-frame:hover { transform:rotate(0deg) scale(1.02); }
+  .hero-photo { width:100%; height:100%; object-fit:cover; display:block; animation:slowZoom 14s ease-in-out infinite alternate; }
+  @keyframes slowZoom { from{transform:scale(1);} to{transform:scale(1.08);} }
+  .photo-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,33,78,.05) 0%, transparent 35%, rgba(15,33,78,.45) 100%); }
+  .photo-fallback { position:absolute; inset:0; display:none; flex-direction:column; align-items:center; justify-content:center; gap:1rem; color:#fff; text-align:center; font-family:"Fraunces",serif; font-size:1.15rem; line-height:1.35; padding:1.5rem; }
+  .photo-frame.noimg .photo-fallback { display:flex; }
+  .photo-frame.noimg .photo-overlay { display:none; }
+  /* Floating impact badge */
+  .float-badge { position:absolute; left:-14px; bottom:18px; z-index:5; background:var(--surface); color:var(--ink); border:1px solid var(--line); border-radius:16px; padding:.7rem 1.1rem; box-shadow:var(--shadow); animation:badgeFloat 4.5s ease-in-out infinite; }
+  .float-badge .bn { font-family:"Fraunces",serif; font-weight:700; font-size:1.5rem; color:var(--primary); line-height:1; display:flex; align-items:baseline; }
+  .float-badge .bn i { color:var(--accent); font-style:normal; }
+  .float-badge .bl { font-size:.72rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-top:.15rem; }
+  @keyframes badgeFloat { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-9px);} }
+
+  /* Scroll cue */
+  .scroll-cue { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; gap:.4rem; width:fit-content; margin:clamp(2rem,5vw,3.2rem) auto 0; color:var(--muted); font-size:.82rem; font-weight:600; letter-spacing:.04em; transition:color .2s; }
+  .scroll-cue:hover { color:var(--primary); }
+  .scroll-cue svg { animation:bob 1.8s ease-in-out infinite; }
+  @keyframes bob { 0%,100%{transform:translateY(0);} 50%{transform:translateY(6px);} }
+
+  /* ===================== TRUST STRIP ===================== */
+  .trust { border-block:1px solid var(--line); padding:1.4rem 0; }
+  .trust-row { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:.7rem 1.6rem; color:var(--muted); font-size:.92rem; font-weight:500; }
+  .trust-row b { color:var(--ink); }
+  .badge { display:inline-flex; align-items:center; gap:.45rem; background:var(--surface); border:1px solid var(--line); padding:.4rem .9rem; border-radius:100px; }
+
+  /* ===================== SECTION ===================== */
+  .section { padding:clamp(4rem,9vw,7rem) 0; }
+  .section-head { max-width:60ch; margin-bottom:3rem; }
+  .section-head.center { margin-inline:auto; text-align:center; }
+  .section-head h2 { font-size:clamp(2rem,4vw,3rem); margin:.9rem 0 .8rem; }
+  .section-head p { color:var(--muted); font-size:1.05rem; }
+
+  /* ===================== MISSION / ASK ===================== */
+  .mission-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+  .mission-text h2 { font-size:clamp(2rem,4vw,2.9rem); margin:.9rem 0 1.1rem; }
+  .mission-text p { color:var(--muted); margin-bottom:1rem; }
+  .ask-cards { display:grid; gap:1rem; }
+  .ask { display:flex; gap:1rem; align-items:flex-start; background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:1.3rem 1.4rem; transition:transform .25s, box-shadow .25s, border-color .25s; }
+  .ask:hover { transform:translateX(6px); box-shadow:var(--shadow); border-color:var(--primary); }
+  .ask .ico { width:48px; height:48px; flex:none; border-radius:13px; display:grid; place-items:center; background:var(--accent-soft); color:var(--accent-deep); }
+  .ask h4 { font-size:1.15rem; margin-bottom:.2rem; }
+  .ask p { color:var(--muted); font-size:.93rem; margin:0; }
+
+  /* ===================== STATS ===================== */
+  .stats { background:var(--bg-soft); }
+  .stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem; }
+  .stat { background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:2rem 1.4rem; text-align:center; box-shadow:var(--shadow); }
+  .stat .num { font-family:"Fraunces",serif; font-size:clamp(2.1rem,4vw,3rem); font-weight:700; color:var(--primary); line-height:1; }
+  .stat .num .plus { color:var(--accent); }
+  .stat .label { margin-top:.6rem; font-size:.92rem; color:var(--muted); font-weight:500; }
+
+  /* ===================== WORK CARDS ===================== */
+  .work-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.4rem; }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:22px; padding:1.8rem 1.6rem; transition:transform .3s, box-shadow .3s, border-color .3s; }
+  .card:hover { transform:translateY(-6px); box-shadow:var(--shadow); border-color:var(--primary); }
+  .card .ico { width:54px; height:54px; border-radius:15px; display:grid; place-items:center; background:var(--accent-soft); color:var(--accent-deep); margin-bottom:1.1rem; }
+  .card h3 { font-size:1.25rem; margin-bottom:.5rem; }
+  .card p { color:var(--muted); font-size:.96rem; }
+
+  /* ===================== TIMELINE ===================== */
+  .timeline { position:relative; max-width:760px; margin-inline:auto; padding-left:0; }
+  .tl-line { position:absolute; left:21px; top:6px; bottom:6px; width:2px; background:var(--line-strong); }
+  .tl-line .fill { position:absolute; top:0; left:0; width:100%; height:0; background:linear-gradient(var(--primary),var(--accent)); transition:height .1s linear; }
+  .tl-item { position:relative; padding:0 0 2.4rem 64px; }
+  .tl-item:last-child { padding-bottom:0; }
+  .tl-dot { position:absolute; left:12px; top:2px; width:20px; height:20px; border-radius:50%; background:var(--surface); border:3px solid var(--primary); z-index:2; transition:background .3s, transform .3s; }
+  .tl-item.in .tl-dot { background:var(--accent); border-color:var(--accent); transform:scale(1.15); }
+  .tl-year { font-family:"Fraunces",serif; font-weight:700; color:var(--primary); font-size:1.05rem; }
+  .tl-item h4 { font-size:1.3rem; margin:.2rem 0 .4rem; }
+  .tl-item p { color:var(--muted); font-size:.97rem; }
+
+  /* ===================== FOUNDER QUOTE ===================== */
+  .founder { background:linear-gradient(160deg,var(--primary-deep),var(--primary)); color:#fff; border-radius:30px; padding:clamp(2.5rem,5vw,4rem); position:relative; overflow:hidden; box-shadow:var(--shadow); }
+  .founder::after { content:""; position:absolute; width:340px; height:340px; right:-100px; bottom:-140px; background:rgba(255,255,255,.10); border-radius:50%; }
+  .founder .mark-big { position:absolute; right:6%; top:-10px; width:120px; opacity:.18; }
+  .founder blockquote { font-family:"Fraunces",serif; font-size:clamp(1.6rem,3.4vw,2.5rem); line-height:1.25; font-weight:500; max-width:20ch; position:relative; z-index:2; }
+  .founder .who { margin-top:1.6rem; position:relative; z-index:2; }
+  .founder .who b { display:block; font-size:1.05rem; }
+  .founder .who span { opacity:.85; font-size:.92rem; }
+
+  /* ===================== GALLERY ===================== */
+  .gallery { display:grid; grid-template-columns:repeat(6,1fr); grid-auto-rows:140px; gap:1rem; }
+  .tile { position:relative; border-radius:18px; overflow:hidden; background:linear-gradient(150deg,var(--primary),var(--accent-deep)); box-shadow:var(--shadow); }
+  .tile img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s ease; }
+  .tile:hover img { transform:scale(1.08); }
+  .tile .cap { position:absolute; left:0; right:0; bottom:0; padding:.9rem; color:#fff; font-size:.85rem; font-weight:600; background:linear-gradient(transparent,rgba(0,0,0,.65)); opacity:0; transform:translateY(8px); transition:opacity .3s, transform .3s; }
+  .tile:hover .cap { opacity:1; transform:none; }
+  .tile.big { grid-column:span 2; grid-row:span 2; }
+  .tile.wide { grid-column:span 2; }
+  .tile.tall { grid-row:span 2; }
+
+  /* ===================== DONATE ===================== */
+  .donate-grid { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:start; }
+  .letter { background:var(--surface); border:1px solid var(--line); border-radius:24px; padding:2rem; box-shadow:var(--shadow); }
+  .letter p { color:var(--muted); margin-bottom:1rem; font-size:.98rem; }
+  .letter .sign { font-family:"Fraunces",serif; color:var(--ink); font-weight:600; }
+  .picker { background:var(--surface); border:1px solid var(--line); border-radius:24px; padding:2rem; box-shadow:var(--shadow); position:sticky; top:90px; }
+  .amounts { display:grid; grid-template-columns:repeat(4,1fr); gap:.6rem; margin:1.2rem 0; }
+  .amt { padding:.8rem .4rem; border-radius:14px; border:1.5px solid var(--line-strong); background:transparent; color:var(--ink); font-weight:700; cursor:pointer; font-family:inherit; transition:all .2s; }
+  .amt:hover { border-color:var(--primary); }
+  .amt.active { background:var(--primary); color:#fff; border-color:var(--primary); transform:translateY(-2px); }
+  .custom-row { display:flex; align-items:center; gap:.5rem; border:1.5px solid var(--line-strong); border-radius:14px; padding:.4rem .9rem; margin-bottom:1.2rem; }
+  .custom-row span { color:var(--muted); font-weight:700; }
+  .custom-row input { border:none; background:transparent; color:var(--ink); font-size:1.1rem; font-weight:700; width:100%; outline:none; font-family:inherit; }
+  .impact-box { background:var(--bg-soft); border-radius:16px; padding:1.2rem 1.3rem; margin-bottom:1rem; min-height:92px; display:flex; gap:.9rem; align-items:center; }
+  .impact-box .ico { width:44px; height:44px; flex:none; border-radius:12px; background:var(--accent-soft); color:var(--accent-deep); display:grid; place-items:center; }
+  .impact-box .txt b { display:block; }
+  .impact-box .txt span { color:var(--muted); font-size:.9rem; }
+  .tax-note { font-size:.85rem; color:var(--muted); text-align:center; margin-top:.9rem; }
+  .tax-note b { color:var(--primary); }
+
+  /* ===================== INVOLVE ===================== */
+  .involve { background:var(--bg-soft); }
+  .involve-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; }
+  .involve-card { background:var(--surface); border:1px solid var(--line); border-radius:22px; padding:2rem 1.7rem; transition:transform .3s, box-shadow .3s; }
+  .involve-card:hover { transform:translateY(-6px); box-shadow:var(--shadow); }
+  .involve-card .tag { font-size:.75rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--accent-deep); }
+  .involve-card h3 { font-size:1.5rem; margin:.6rem 0; }
+  .involve-card p { color:var(--muted); font-size:.96rem; margin-bottom:1.4rem; }
+  .involve-card .arrow { font-weight:600; color:var(--primary); display:inline-flex; align-items:center; gap:.4rem; transition:gap .2s; }
+  .involve-card:hover .arrow { gap:.8rem; }
+
+  /* ===================== CONTACT ===================== */
+  .contact-grid { display:grid; grid-template-columns:1fr 1.1fr; gap:3rem; align-items:start; }
+  .contact-info .row { display:flex; gap:1rem; align-items:center; margin-bottom:1.3rem; }
+  .contact-info .row .ico { width:48px; height:48px; flex:none; border-radius:13px; background:var(--accent-soft); color:var(--accent-deep); display:grid; place-items:center; }
+  .contact-info .row b { display:block; }
+  .contact-info .row span { color:var(--muted); font-size:.95rem; }
+  .form { background:var(--surface); border:1px solid var(--line); border-radius:24px; padding:2rem; box-shadow:var(--shadow); }
+  .field { margin-bottom:1rem; }
+  .field label { display:block; font-size:.85rem; font-weight:600; margin-bottom:.4rem; }
+  .field input, .field textarea { width:100%; padding:.8rem 1rem; border-radius:13px; border:1.5px solid var(--line-strong); background:transparent; color:var(--ink); font-family:inherit; font-size:.96rem; outline:none; transition:border-color .2s; }
+  .field input:focus, .field textarea:focus { border-color:var(--primary); }
+  .form-msg { display:none; margin-top:1rem; padding:.9rem 1.1rem; border-radius:13px; background:var(--accent-soft); color:var(--accent-deep); font-weight:600; font-size:.92rem; }
+  .form-msg.show { display:block; animation:pop .4s ease; }
+  @keyframes pop { from{opacity:0;transform:scale(.96);} to{opacity:1;transform:none;} }
+
+  /* ===================== FOOTER ===================== */
+  footer { padding:3.5rem 0 2rem; border-top:1px solid var(--line); background:var(--bg-soft); }
+  .foot-grid { display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:2.2rem; margin-bottom:2.5rem; }
+  .foot-grid p { color:var(--muted); font-size:.95rem; max-width:34ch; margin-top:.8rem; }
+  .foot-col h4 { font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:1rem; font-family:"Plus Jakarta Sans",sans-serif; font-weight:700; }
+  .foot-col a { display:block; color:var(--ink); font-size:.95rem; margin-bottom:.6rem; opacity:.85; transition:opacity .2s, color .2s; }
+  .foot-col a:hover { opacity:1; color:var(--primary); }
+  .socials { display:flex; gap:.6rem; margin-top:1rem; }
+  .socials a { width:40px; height:40px; border-radius:11px; border:1px solid var(--line-strong); display:grid; place-items:center; color:var(--ink); transition:all .2s; }
+  .socials a:hover { background:var(--primary); color:#fff; border-color:var(--primary); transform:translateY(-3px); }
+  .foot-bottom { display:flex; flex-wrap:wrap; justify-content:space-between; gap:1rem; padding-top:1.6rem; border-top:1px solid var(--line); color:var(--muted); font-size:.86rem; }
+  .tagline-hi { font-family:"Fraunces",serif; color:var(--accent-deep); font-weight:600; }
+
+  /* ===================== BACK TO TOP ===================== */
+  #toTop { position:fixed; right:22px; bottom:22px; width:50px; height:50px; border-radius:50%; background:var(--primary); color:#fff; border:none; cursor:pointer; display:grid; place-items:center; box-shadow:0 12px 26px -10px var(--primary); opacity:0; pointer-events:none; transform:translateY(12px); transition:opacity .3s, transform .3s; z-index:55; }
+  #toTop.show { opacity:1; pointer-events:auto; transform:none; }
+
+  /* ===================== REVEAL ===================== */
+  .reveal { opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity:1; transform:none; }
+  .reveal.d1{transition-delay:.08s;} .reveal.d2{transition-delay:.16s;} .reveal.d3{transition-delay:.24s;}
+
+  /* ===================== RESPONSIVE ===================== */
+  @media (max-width:960px) {
+    .hero-grid,.mission-grid,.donate-grid,.contact-grid { grid-template-columns:1fr; }
+    .hero-art { min-height:auto; order:-1; margin-bottom:.5rem; }
+    .photo-frame { width:min(320px,76%); transform:rotate(0deg); }
+    .stat-grid,.work-grid { grid-template-columns:repeat(2,1fr); }
+    .involve-grid { grid-template-columns:1fr; }
+    .gallery { grid-template-columns:repeat(2,1fr); grid-auto-rows:130px; }
+    .tile.big { grid-column:span 2; grid-row:span 1; }
+    .foot-grid { grid-template-columns:1fr 1fr; }
+    .picker { position:static; }
+    .nav-links { position:fixed; inset:72px 0 auto 0; flex-direction:column; gap:0; background:var(--surface); border-bottom:1px solid var(--line); padding:.5rem 6vw 1.5rem; transform:translateY(-135%); transition:transform .35s; box-shadow:var(--shadow); }
+    .nav-links.open { transform:translateY(0); }
+    .nav-links a.link { padding:.9rem 0; width:100%; border-bottom:1px solid var(--line); }
+    .nav-links .btn { margin-top:.8rem; justify-content:center; }
+    .hamburger { display:grid; place-items:center; }
+  }
+  @media (max-width:560px) {
+    .stat-grid,.work-grid,.foot-grid,.amounts { grid-template-columns:repeat(2,1fr); }
+    .hero p.lead { max-width:none; }
+  }
+  :focus-visible { outline:3px solid var(--accent); outline-offset:3px; border-radius:6px; }
+  @media (prefers-reduced-motion: reduce) {
+    *{ animation:none !important; scroll-behavior:auto; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== FEATHER SYMBOLS ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="feather" viewBox="0 0 100 220">
+    <defs><linearGradient id="fg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7c46c"/><stop offset="55%" stop-color="#f3a738"/><stop offset="100%" stop-color="#e67e3a"/>
+    </linearGradient></defs>
+    <path d="M50 6 C 82 70, 84 150, 52 212 C 18 150, 18 70, 50 6 Z" fill="url(#fg)"/>
+    <path d="M50 18 L 50 198" stroke="rgba(255,255,255,.85)" stroke-width="2.4" stroke-linecap="round"/>
+    <g stroke="rgba(255,255,255,.55)" stroke-width="1.6" stroke-linecap="round">
+      <path d="M50 50 L 30 38"/><path d="M50 50 L 70 38"/><path d="M50 78 L 26 64"/><path d="M50 78 L 74 64"/>
+      <path d="M50 108 L 25 94"/><path d="M50 108 L 75 94"/><path d="M50 138 L 29 126"/><path d="M50 138 L 71 126"/>
+      <path d="M50 166 L 35 158"/><path d="M50 166 L 65 158"/>
+    </g>
+  </symbol>
+  <symbol id="feather-white" viewBox="0 0 100 220">
+    <path d="M50 6 C 82 70, 84 150, 52 212 C 18 150, 18 70, 50 6 Z" fill="#fff"/>
+  </symbol>
+</svg>
+
+<div id="progress"></div>
+
+<!-- ===== NAV ===== -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top"><svg class="mark"><use href="#feather"/></svg>Naye<b>Pankh</b></a>
+    <nav class="nav-links" id="menu" aria-label="Primary">
+      <a class="link" href="#about">About</a>
+      <a class="link" href="#work">Our Work</a>
+      <a class="link" href="#story">Our Story</a>
+      <a class="link" href="#moments">Moments</a>
+      <a class="link" href="#contact">Contact</a>
+      <a href="#donate" class="btn btn-primary">Donate</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme" aria-label="Toggle day and night theme" aria-pressed="false">
+        <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <button class="hamburger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow reveal">UP Govt. · 80G &amp; 12A Registered · Student-Led</span>
+        <h1 class="reveal d1">It’s that easy to bring a <span class="accent">smile</span> on their faces.</h1>
+        <p class="lead reveal d2">We don’t ask for much — just help us with whatever you can: your money, your skill, or your time. Together, let’s give the underprivileged new wings to fly.</p>
+        <div class="hero-cta reveal d3">
+          <a href="#donate" class="btn btn-primary">Donate Now
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#involve" class="btn btn-ghost">Join the team</a>
+        </div>
+        <div class="translate-chip reveal d3"><svg width="18" height="18"><use href="#feather"/></svg><span><span class="hi">नए पंख</span> &nbsp;·&nbsp; “new wings” — a fresh start to rise</span></div>
+      </div>
+      <div class="hero-art">
+        <div class="halo" aria-hidden="true"></div>
+        <div class="photo-frame reveal d2">
+          <img class="hero-photo" loading="eager" alt="NayePankh volunteers bringing a smile to a child they serve"
+               src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1024,fit=crop/YKbL494Mv8Ip3qgy/whatsapp-image-2023-01-31-at-9.40.45-pm-dWxpDb2pNbCaxERZ.jpeg"
+               onerror="this.closest('.photo-frame').classList.add('noimg'); this.remove();" />
+          <div class="photo-overlay" aria-hidden="true"></div>
+          <div class="photo-fallback" aria-hidden="true"><svg width="74" height="74"><use href="#feather-white"/></svg><span>Bringing smiles,<br/>one day at a time</span></div>
+          <div class="float-badge" aria-label="Over 2 lakh lives uplifted">
+            <div class="bn"><span data-count="200000">0</span><i>+</i></div>
+            <div class="bl">lives uplifted</div>
+          </div>
+        </div>
+        <svg class="drift d1" aria-hidden="true"><use href="#feather"/></svg>
+        <svg class="drift d2" aria-hidden="true"><use href="#feather"/></svg>
+        <svg class="drift d3" aria-hidden="true"><use href="#feather"/></svg>
+      </div>
+    </div>
+
+    <a class="scroll-cue" href="#about" aria-label="Scroll to explore">
+      <span>Scroll to explore their story</span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+    </a>
+  </section>
+
+  <!-- ===== TRUST ===== -->
+  <div class="trust">
+    <div class="wrap trust-row">
+      <span class="badge">🪶 <b>80G &amp; 12A</b> certified</span>
+      <span class="badge">🇮🇳 Societies Act, 1860</span>
+      <span class="badge">🤝 NITI Aayog affiliated</span>
+      <span>Featured in <b>The Pioneer</b>, <b>Dainik Jagran</b> &amp; <b>Hindustan</b></span>
+    </div>
+  </div>
+
+  <!-- ===== MISSION / WHAT WE ASK ===== -->
+  <section class="section" id="about">
+    <div class="wrap mission-grid">
+      <div class="mission-text">
+        <span class="eyebrow reveal">About us</span>
+        <h2 class="reveal d1">Think global, <span style="color:var(--accent)">act local.</span></h2>
+        <p class="reveal d2">NayePankh Foundation is a non-governmental organisation with one strong desire — to help society and make it a better place for everyone. Service to mankind is service to god. Let’s revolutionise society together.</p>
+        <p class="reveal d2">We’re one of the biggest student-led NGOs in India, with operations across Kanpur, Ghaziabad and other cities — proudly run by young people, many still in school and college.</p>
+        <div class="reveal d3" style="margin-top:1.4rem; display:flex; gap:.8rem; flex-wrap:wrap;">
+          <a href="#story" class="btn btn-ghost">Learn more</a>
+          <a href="#certs" class="btn btn-ghost">Our certificates</a>
+        </div>
+      </div>
+      <div class="ask-cards">
+        <div class="ask reveal"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h3.2a1.8 1.8 0 0 1 0 3.6H10M9.5 13.1h3.5a1.9 1.9 0 0 1 0 3.8H9.5"/></svg></div><div><h4>Give money</h4><p>Even a small amount becomes a meal, a uniform, or a month of dignity for someone.</p></div></div>
+        <div class="ask reveal d1"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 1 0 5.6l-7 7a2 2 0 0 1-2.8 0l-.8-.8a2 2 0 0 1 0-2.8l7-7a4 4 0 0 1 5.6 0z"/><path d="M16 8l4-4"/></svg></div><div><h4>Give skill</h4><p>Designers, writers, teachers, coders — lend what you know and multiply our reach.</p></div></div>
+        <div class="ask reveal d2"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><h4>Give time</h4><p>Spend a morning on the ground and meet the people your effort reaches.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <section class="section stats">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <span class="eyebrow">The journey so far</span>
+        <h2>Small wings, wide skies.</h2>
+        <p>Every number below is a real person who got a little closer to a dignified day.</p>
+      </div>
+      <div class="stat-grid">
+        <div class="stat reveal"><div class="num"><span data-count="200000">0</span><span class="plus">+</span></div><div class="label">People supported across India</div></div>
+        <div class="stat reveal d1"><div class="num"><span data-count="30000">0</span><span class="plus">+</span></div><div class="label">Interns trained &amp; mentored</div></div>
+        <div class="stat reveal d2"><div class="num"><span data-count="2021">0</span></div><div class="label">Serving since 28 March</div></div>
+        <div class="stat reveal d3"><div class="num"><span data-count="50" data-suffix="%">0</span></div><div class="label">Tax relief under 80G</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WORK ===== -->
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">What we do</span>
+        <h2>Four needs. One promise — dignity first.</h2>
+        <p>We keep our work simple and direct, so help reaches people without losing its way.</p>
+      </div>
+      <div class="work-grid">
+        <article class="card reveal"><div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M4 11l1 8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2l1-8"/></svg></div><h3>Warm meals</h3><p>No one should sleep hungry. We distribute food to families — and to the stray animals on their streets too.</p></article>
+        <article class="card reveal d1"><div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 8 6 11 6 15a6 6 0 0 0 12 0c0-4-2-7-6-13z"/></svg></div><h3>Period dignity</h3><p>Free sanitary napkins and honest menstrual-hygiene awareness, so no girl feels ashamed of something natural.</p></article>
+        <article class="card reveal d2"><div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7l-8-4-8 4 8 4 8-4zM4 7v6l8 4 8-4V7"/></svg></div><h3>Clothing drives</h3><p>Warm, clean clothes for poor families through the cold months and the rest of the year.</p></article>
+        <article class="card reveal d3"><div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5zM6 12v5c0 1 3 2 6 2s6-1 6-2v-5"/></svg></div><h3>Education</h3><p>Learning material and mentoring so children stay in school and build a better future.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STORY / TIMELINE ===== -->
+  <section class="section" id="story" style="background:var(--bg-soft);">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <span class="eyebrow">How it started</span>
+        <h2>From a handful of highschoolers to a movement.</h2>
+        <p>“Badalte Bharat ki Nayi Tasveer” — the new picture of a changing India.</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-line"><div class="fill" id="tlFill"></div></div>
+        <div class="tl-item reveal"><span class="tl-dot"></span><div class="tl-year">2020</div><h4>The spark</h4><p>As the world fought COVID-19, a group of highschoolers felt an urge to help with whatever they had. It was tough — but they didn’t lose hope.</p></div>
+        <div class="tl-item reveal"><span class="tl-dot"></span><div class="tl-year">28 March 2021</div><h4>Boots on the ground</h4><p>NayePankh officially landed to serve, driven by a simple belief: the real hope of a nation lies in the hands of its youth.</p></div>
+        <div class="tl-item reveal"><span class="tl-dot"></span><div class="tl-year">Later 2021</div><h4>New wings</h4><p>The mission widened beyond relief — food, sanitary napkins, clothes and education — and the name NayePankh was born: giving wings to uplift.</p></div>
+        <div class="tl-item reveal"><span class="tl-dot"></span><div class="tl-year">2021–22</div><h4>Recognised &amp; certified</h4><p>Registered with the UP Government and certified 12A &amp; 80G, so every donation earns 50% income-tax relief.</p></div>
+        <div class="tl-item reveal"><span class="tl-dot"></span><div class="tl-year">Today</div><h4>2 lakh+ lives, and counting</h4><p>One of India’s largest student-led NGOs — still hustling, because the goal isn’t complete yet.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOUNDER QUOTE ===== -->
+  <section class="section">
+    <div class="wrap reveal">
+      <div class="founder">
+        <svg class="mark-big"><use href="#feather-white"/></svg>
+        <blockquote>“If we all do something, then together there is no problem that we cannot solve.”</blockquote>
+        <div class="who"><b>Prashant Shukla</b><span>Founder &amp; President, NayePankh Foundation</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MOMENTS GALLERY ===== -->
+  <section class="section" id="moments">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Moments on the ground</span>
+        <h2>What your kindness looks like.</h2>
+        <p>Real days, real smiles — captured while serving across Kanpur, Ghaziabad and beyond.</p>
+      </div>
+      <div class="gallery reveal">
+        <div class="tile big"><img loading="lazy" alt="Volunteers serving the community" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=723,fit=crop/YKbL494Mv8Ip3qgy/194833729_501933980860276_3042104886709034452_n_1622920383-AGBqjJk3xDSRO7Ba.jpg"/><div class="cap">Feeding families with dignity</div></div>
+        <div class="tile tall"><img loading="lazy" alt="Early days of the foundation" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=810,fit=crop/YKbL494Mv8Ip3qgy/195418199_329666142078593_6826150489684246490_n_1622920354-mk3L72pPvKhpQZN0.jpg"/><div class="cap">Where it all began</div></div>
+        <div class="tile"><img loading="lazy" alt="Community service drive" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=738,fit=crop/YKbL494Mv8Ip3qgy/1__5__1620906574-AzGyREVZ7oI2qvEa.jpg"/><div class="cap">On the streets, every week</div></div>
+        <div class="tile"><img loading="lazy" alt="Distributing essentials" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=738,fit=crop/YKbL494Mv8Ip3qgy/1682903599535-A0x4k3kl9kukKzev.jpg"/><div class="cap">Essentials, delivered</div></div>
+        <div class="tile wide"><img loading="lazy" alt="Volunteers on a service drive" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=512,fit=crop/YKbL494Mv8Ip3qgy/img-20210530-wa0251_1622926825-mP4ZLjyn3ecJBJrR.jpg"/><div class="cap">A team that keeps growing</div></div>
+        <div class="tile"><img loading="lazy" alt="Serving the underprivileged" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,h=814,fit=crop/YKbL494Mv8Ip3qgy/1682903595951-AE0qV567r4uXNPwx.jpg"/><div class="cap">One person at a time</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DONATE ===== -->
+  <section class="section" id="donate" style="background:var(--bg-soft);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Together, let’s make a difference</span>
+        <h2>Your gift changes a trajectory.</h2>
+        <p>Pick an amount and see exactly what it becomes. Every rupee is tax-exempt under 80G.</p>
+      </div>
+      <div class="donate-grid">
+        <div class="letter reveal">
+          <p>Dear friends, NayePankh began with a simple vision — to uplift marginalised communities and give them access to education, healthcare and the basics so many of us take for granted.</p>
+          <p>As you read this, countless children and families are surviving without clean water, sanitation or a chance to attend school. We’re working to break that cycle and offer a ray of hope — but we can only do it with you.</p>
+          <p>Your support can be a child’s school uniform, a pair of shoes, or a nutritious meal. It can change a life forever. Thank you for considering our cause — it means the world to us, and to those we serve.</p>
+          <p class="sign">— Prashant Shukla, Founder &amp; President</p>
+        </div>
+        <div class="picker reveal d1">
+          <h3 style="font-size:1.4rem; margin-bottom:.3rem;">Choose your impact</h3>
+          <div class="amounts" id="amounts">
+            <button class="amt active" data-amt="100">₹100</button>
+            <button class="amt" data-amt="500">₹500</button>
+            <button class="amt" data-amt="1100">₹1100</button>
+            <button class="amt" data-amt="2500">₹2500</button>
+          </div>
+          <div class="custom-row"><span>₹</span><input id="customAmt" type="number" min="1" placeholder="Enter your own amount" inputmode="numeric"/></div>
+          <div class="impact-box" id="impactBox">
+            <div class="ico" id="impactIco"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M4 11l1 8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2l1-8"/></svg></div>
+            <div class="txt"><b id="impactTitle">Warm meals for a family</b><span id="impactDesc">₹100 puts a full day of cooked meals on a struggling family’s table.</span></div>
+          </div>
+          <a href="https://nayepankh.com/donate" target="_blank" rel="noopener" class="btn btn-accent" style="width:100%; justify-content:center;">Donate <span id="donateAmt">₹100</span> now</a>
+          <p class="tax-note">With 80G, about <b id="taxBack">₹50</b> comes back to you as tax relief.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INVOLVE ===== -->
+  <section class="section involve" id="involve">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Join our team</span>
+        <h2>Three ways to grow your wings with us.</h2>
+        <p>Whether you care about education, health, or crisis relief — there’s a place for you here.</p>
+      </div>
+      <div class="involve-grid">
+        <article class="involve-card reveal"><span class="tag">Give a weekend</span><h3>Volunteer</h3><p>Cook, pack, distribute, teach. Be part of a drive and see your effort land in real hands.</p><a href="#contact" class="arrow">Join a drive →</a></article>
+        <article class="involve-card reveal d1"><span class="tag">Give support</span><h3>Donate</h3><p>Feed a family or stock a hygiene kit. With 80G you get 50% back at tax time.</p><a href="#donate" class="arrow">Support a cause →</a></article>
+        <article class="involve-card reveal d2"><span class="tag">Give &amp; grow</span><h3>Intern</h3><p>Over 30,000 students have built real skills here while doing purposeful work. Beginners welcome.</p><a href="#contact" class="arrow">Apply to intern →</a></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="section" id="contact">
+    <div class="wrap contact-grid">
+      <div class="contact-info">
+        <span class="eyebrow reveal">Get in touch</span>
+        <h2 class="reveal d1" style="font-size:clamp(2rem,4vw,2.8rem); margin:.9rem 0 1.6rem;">We’d love to hear from you.</h2>
+        <div class="row reveal d1"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></div><div><b>Email</b><span>contact@nayepankh.com</span></div></div>
+        <div class="row reveal d2"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></div><div><b>Phone</b><span>+91 83185 00748</span></div></div>
+        <div class="row reveal d3"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><b>Where we work</b><span>Kanpur &amp; Ghaziabad, Uttar Pradesh</span></div></div>
+      </div>
+      <form class="form reveal d1" id="contactForm" novalidate>
+        <div class="field"><label for="name">Name</label><input id="name" type="text" placeholder="Your name" required/></div>
+        <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="you@email.com" required/></div>
+        <div class="field"><label for="msg">How would you like to help?</label><textarea id="msg" rows="4" placeholder="I’d like to volunteer / donate / intern…"></textarea></div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Send message</button>
+        <div class="form-msg" id="formMsg">🪶 Thank you! This is a demo form — your message would reach our team once connected to a backend.</div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer id="certs">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <a class="brand" href="#top" style="font-size:1.3rem;"><svg class="mark"><use href="#feather"/></svg>Naye<b>Pankh</b></a>
+        <p>A UP Government registered, 80G &amp; 12A certified, student-led NGO on a mission to make this earth a kinder place — for every creature on it.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/nayepankhfoundation" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.linkedin.com/company/nayepankh" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.5 8h4V24h-4zM8 8h3.8v2.2h.1c.5-1 1.8-2.2 3.9-2.2 4.2 0 5 2.7 5 6.3V24h-4v-7c0-1.7 0-3.8-2.3-3.8s-2.7 1.8-2.7 3.7V24H8z"/></svg></a>
+          <a href="https://www.youtube.com/@nayepankhfoundation" target="_blank" rel="noopener" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.5-.4-5a2.8 2.8 0 0 0-2-2C18.7 4.5 12 4.5 12 4.5s-6.7 0-8.6.5a2.8 2.8 0 0 0-2 2C1 8.5 1 12 1 12s0 3.5.4 5a2.8 2.8 0 0 0 2 2c1.9.5 8.6.5 8.6.5s6.7 0 8.6-.5a2.8 2.8 0 0 0 2-2c.4-1.5.4-5 .4-5zM9.8 15.5v-7l6 3.5z"/></svg></a>
+          <a href="https://www.facebook.com/nayepankhfoundation" target="_blank" rel="noopener" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.7l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg></a>
+          <a href="https://www.twitter.com/nayepankh" target="_blank" rel="noopener" aria-label="Twitter / X"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.3 8.3L23 22h-6.8l-5.3-7-6 7H2l7.8-8.9L1.5 2h7l4.8 6.4zm-2.4 18h1.7L7.6 3.8H5.8z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col"><h4>Explore</h4><a href="#about">About Us</a><a href="#work">Our Work</a><a href="#story">Our Story</a><a href="#moments">Moments</a></div>
+      <div class="foot-col"><h4>Support</h4><a href="#donate">Donate</a><a href="#involve">Volunteer</a><a href="#involve">Intern</a><a href="#contact">Contact Us</a></div>
+      <div class="foot-col"><h4>Legal</h4><a href="https://nayepankh.com/terms-and-conditions" target="_blank" rel="noopener">Terms &amp; Conditions</a><a href="https://nayepankh.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a><a href="https://nayepankh.com/cancellation-and-refund" target="_blank" rel="noopener">Cancellation &amp; Refund</a><a href="https://nayepankh.com/our-certificates" target="_blank" rel="noopener">Our Certificates</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 NayePankh Foundation · <span class="tagline-hi">Badalte Bharat Ki Nayi Tasveer</span></span>
+      <span>Reimagined by Divyansh — Front-End Internship Submission 🪶</span>
+    </div>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+
+<script>
+  const root = document.documentElement;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Theme */
+  const themeBtn = document.getElementById('theme');
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    root.classList.add('dark'); themeBtn.setAttribute('aria-pressed','true');
+  }
+  themeBtn.addEventListener('click', () => {
+    const dark = root.classList.toggle('dark');
+    themeBtn.setAttribute('aria-pressed', String(dark));
+  });
+
+  /* Mobile menu */
+  const burger = document.getElementById('burger'), menu = document.getElementById('menu');
+  burger.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(open));
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open'); burger.setAttribute('aria-expanded','false');
+  }));
+
+  /* Scroll: nav shadow, progress bar, back-to-top */
+  const nav = document.getElementById('nav'), bar = document.getElementById('progress'), toTop = document.getElementById('toTop');
+  function onScroll() {
+    const y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 8);
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+    toTop.classList.toggle('show', y > 600);
+  }
+  onScroll(); window.addEventListener('scroll', onScroll, { passive:true });
+  toTop.addEventListener('click', () => window.scrollTo({ top:0, behavior: reduce ? 'auto' : 'smooth' }));
+
+  /* Reveal */
+  const revealEls = document.querySelectorAll('.reveal');
+  if (reduce) { revealEls.forEach(el => el.classList.add('in')); }
+  else {
+    const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }), { threshold:.15 });
+    revealEls.forEach(el => io.observe(el));
+  }
+
+  /* Timeline reveal + line fill */
+  const tlItems = document.querySelectorAll('.tl-item');
+  const tlFill = document.getElementById('tlFill');
+  const tlIo = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold:.4 });
+  tlItems.forEach(el => tlIo.observe(el));
+  function fillTimeline() {
+    const tl = document.querySelector('.timeline'); if (!tl) return;
+    const r = tl.getBoundingClientRect(); const vh = window.innerHeight;
+    const p = Math.min(Math.max((vh*0.6 - r.top) / r.height, 0), 1);
+    tlFill.style.height = (p*100) + '%';
+  }
+  fillTimeline(); window.addEventListener('scroll', fillTimeline, { passive:true });
+
+  /* Counters */
+  const fmt = n => n.toLocaleString('en-IN');
+  function runCount(el) {
+    const target = +el.dataset.count, suffix = el.dataset.suffix || '';
+    const isYear = target === 2021;
+    if (reduce) { el.textContent = (isYear?target:fmt(target)) + suffix; return; }
+    const dur = 1500, start = performance.now();
+    (function step(now){
+      const p = Math.min((now-start)/dur, 1), eased = 1 - Math.pow(1-p, 3);
+      const val = Math.floor(eased*target);
+      el.textContent = (isYear ? val : fmt(val)) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = (isYear?target:fmt(target)) + suffix;
+    })(start);
+  }
+  const co = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting){ runCount(e.target); co.unobserve(e.target);} }), { threshold:.6 });
+  document.querySelectorAll('[data-count]').forEach(el => co.observe(el));
+
+  /* Donation impact picker */
+  const impacts = {
+    100:  { t:"Warm meals for a family",        d:"₹100 puts a full day of cooked meals on a struggling family’s table.", i:"meal" },
+    500:  { t:"A month of period dignity",       d:"₹500 provides sanitary napkins and hygiene awareness for five girls.", i:"pad" },
+    1100: { t:"A child back in school",          d:"₹1100 covers a uniform, shoes and learning material for one child.", i:"edu" },
+    2500: { t:"Clothing for ten families",       d:"₹2500 helps clothe ten poor families through the cold season.", i:"cloth" }
+  };
+  const icons = {
+    meal:'<path d="M3 11h18M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M4 11l1 8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2l1-8"/>',
+    pad:'<path d="M12 2C8 8 6 11 6 15a6 6 0 0 0 12 0c0-4-2-7-6-13z"/>',
+    edu:'<path d="M22 10L12 5 2 10l10 5 10-5zM6 12v5c0 1 3 2 6 2s6-1 6-2v-5"/>',
+    cloth:'<path d="M20 7l-8-4-8 4 8 4 8-4zM4 7v6l8 4 8-4V7"/>',
+    gift:'<path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7S10 2 7 2 5 5 7 5h5M12 7s2-5 5-5 2 3 0 3h-5"/>'
+  };
+  const amtBtns = document.querySelectorAll('.amt'), customAmt = document.getElementById('customAmt');
+  const impactTitle = document.getElementById('impactTitle'), impactDesc = document.getElementById('impactDesc'), impactIco = document.getElementById('impactIco');
+  const donateAmt = document.getElementById('donateAmt'), taxBack = document.getElementById('taxBack');
+  function svgWrap(paths){ return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+paths+'</svg>'; }
+  function render(amount, preset){
+    donateAmt.textContent = '₹' + fmt(amount);
+    taxBack.textContent = '₹' + fmt(Math.round(amount*0.5));
+    if (preset && impacts[amount]) {
+      impactTitle.textContent = impacts[amount].t;
+      impactDesc.textContent = impacts[amount].d;
+      impactIco.innerHTML = svgWrap(icons[impacts[amount].i]);
+    } else {
+      impactTitle.textContent = "Every rupee works hard";
+      impactDesc.textContent = "₹" + fmt(amount) + " goes straight to food, hygiene, clothing and education for those who need it most.";
+      impactIco.innerHTML = svgWrap(icons.gift);
+    }
+  }
+  amtBtns.forEach(b => b.addEventListener('click', () => {
+    amtBtns.forEach(x => x.classList.remove('active'));
+    b.classList.add('active'); customAmt.value = '';
+    render(+b.dataset.amt, true);
+  }));
+  customAmt.addEventListener('input', () => {
+    const v = parseInt(customAmt.value, 10);
+    amtBtns.forEach(x => x.classList.remove('active'));
+    if (v && v > 0) render(v, false);
+    else { amtBtns[0].classList.add('active'); render(100, true); }
+  });
+
+  /* Contact form (demo) */
+  const form = document.getElementById('contactForm'), formMsg = document.getElementById('formMsg');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!document.getElementById('name').value || !document.getElementById('email').value) {
+      formMsg.textContent = "Please add your name and email so we can reach you.";
+      formMsg.classList.add('show'); return;
+    }
+    formMsg.textContent = "🪶 Thank you! This is a demo form — your message would reach our team once connected to a backend.";
+    formMsg.classList.add('show'); form.reset();
+  });
+</script>
+</body>
+</html>
